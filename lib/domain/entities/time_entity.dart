@@ -34,21 +34,24 @@ class TimeEntity {
   });
 
   factory TimeEntity.fromJson(Map<String, dynamic> json) {
+    final parseDateTimeString =
+        json['datetime'].toString().replaceFirst(json['utc_offset'], '');
     return TimeEntity(
-        utcOffset: json['utc_offse'],
-        timezone: json['timezone'],
-        dayOfWeek: json['day_of_week'],
-        dayOfYear: json['day_of_year'],
-        datetime: json['datetime'],
-        utcDatetime: json['utc_datetime'],
-        unixtime: json['unixtime'],
-        rawOffset: json['raw_offset'],
-        weekNumber: json['week_number'],
-        dst: json['dst'],
-        abbreviation: json['abbreviation'],
-        dstOffset: json['dst_offset'],
-        dstFrom: json['dst_from'],
-        dstUntil: json['dst_until'],
-        clientIp: json['client_ip']);
+      utcOffset: json['utc_offset'],
+      timezone: json['timezone'],
+      dayOfWeek: json['day_of_week'],
+      dayOfYear: json['day_of_year'],
+      datetime: DateTime.parse(parseDateTimeString),
+      utcDatetime: DateTime.parse(json['utc_datetime']),
+      unixtime: json['unixtime'],
+      rawOffset: json['raw_offset'],
+      weekNumber: json['week_number'],
+      dst: json['dst'],
+      abbreviation: json['abbreviation'],
+      dstOffset: json['dst_offset'],
+      dstFrom: json['dst_from'],
+      dstUntil: json['dst_until'],
+      clientIp: json['client_ip'],
+    );
   }
 }
